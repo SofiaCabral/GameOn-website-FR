@@ -35,7 +35,7 @@ let incorrectEntriesLocation = document.querySelector("#incorrect-entries-locati
 
 //conditions d'utilisation.
 //prise des deux elements d'une meme classe
-let checkboxLabel = document.querySelectorAll(".checkbox2-label");
+let checkboxLabel = document.querySelector("#checkbox1");
 
 let incorrectEntriesCheckboxLabel = document.querySelector("#incorrect-entries-checkboxLabel");
 
@@ -83,12 +83,12 @@ function validationForm(e) {
     }
 
     //verification des fois ou la personne est allé à un concours 
-    if (!quantity.value.match(/^[0-9]*$/)) {
-        incorrectEntriesQuantity.textContent = " non valide";
-        incorrectEntriesQuantity.style.color = "red";
-        console.log(quantity.value);
+    // if (!quantity.value.match(/^[0-9]*$/)) {
+    //     incorrectEntriesQuantity.textContent = " non valide";
+    //     incorrectEntriesQuantity.style.color = "red";
+    //     console.log(quantity.value);
 
-    }
+    // }
 
     //verification si une ville a ete choisie 
     if (!location1.checked && !location2.checked && !location3.checked && !location4.checked && !location5.checked && !location6.checked) {
@@ -96,8 +96,7 @@ function validationForm(e) {
         incorrectEntriesLocation.style.color = "red";
     }
     //verification des conditions d'utilisation.
-
-    if (checkboxLabel[0].checked) {
+    if (!checkboxLabel.checked) { //si les conditions ne sont pas coches
         incorrectEntriesCheckboxLabel.textContent = "Vous devez vérifier que vous acceptez les termes et conditions";
         incorrectEntriesCheckboxLabel.style.color = "red";
     }

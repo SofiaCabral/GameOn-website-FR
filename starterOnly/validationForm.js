@@ -83,12 +83,12 @@ function validationForm(e) {
     }
 
     //verification des fois ou la personne est allé à un concours 
-    // if (!quantity.value.match(/^[0-9]*$/)) {
-    //     incorrectEntriesQuantity.textContent = " non valide";
-    //     incorrectEntriesQuantity.style.color = "red";
-    //     console.log(quantity.value);
+    if (!quantity.value.match(/^\d+$/)) { //si ce n'est un numero
+        incorrectEntriesQuantity.textContent = " numero non valide";
+        incorrectEntriesQuantity.style.color = "red";
+        console.log(quantity.value);
 
-    // }
+    }
 
     //verification si une ville a ete choisie 
     if (!location1.checked && !location2.checked && !location3.checked && !location4.checked && !location5.checked && !location6.checked) {

@@ -4,38 +4,38 @@
 
 //Bouton submit 
 
-let buttonSubmit = document.querySelector(".btn-submit");
+const buttonSubmit = document.querySelector(".btn-submit");
 //prenom et span pour l'affichage des erreurs
-let first = document.querySelector("#first");
+const first = document.querySelector("#first");
 let incorrectEntriesFirst = document.querySelector("#incorrect-entries-first");
 //nom et span pour l'affichage des erreurs
-let last = document.querySelector("#last");
+const last = document.querySelector("#last");
 let incorrectEntriesLast = document.querySelector("#incorrect-entries-last");
 //email et span pour l'affichage des erreurs
-let email = document.querySelector("#email");
+const email = document.querySelector("#email");
 let incorrectEntriesEmail = document.querySelector("#incorrect-entries-email");
 //date d'annniversaire et span pour l'affichage des erreurs
-let birthdate = document.querySelector("#birthdate");
+const birthdate = document.querySelector("#birthdate");
 let incorrectEntriesBirthdate = document.querySelector("#incorrect-entries-birthdate");
 // numero de participation dans les tournois et span pour l'affichage des erreurs
-let quantity = document.querySelector("#quantity");
+const quantity = document.querySelector("#quantity");
 let incorrectEntriesQuantity = document.querySelector("#incorrect-entries-quantity");
 //evenement qui permet de declancher la function qui permet de valider le formulaire
 //au clic sur le bouton submit du formulaire
 //checkbox
 
 
-let location1 = document.querySelector("#location1");
-let location2 = document.querySelector("#location2");
-let location3 = document.querySelector("#location3");
-let location4 = document.querySelector("#location4");
-let location5 = document.querySelector("#location5");
-let location6 = document.querySelector("#location6");
-let incorrectEntriesLocation = document.querySelector("#incorrect-entries-location");
+const location1 = document.querySelector("#location1");
+const location2 = document.querySelector("#location2");
+const location3 = document.querySelector("#location3");
+const location4 = document.querySelector("#location4");
+const location5 = document.querySelector("#location5");
+const location6 = document.querySelector("#location6");
+const incorrectEntriesLocation = document.querySelector("#incorrect-entries-location");
 
 //conditions d'utilisation.
 //prise des deux elements d'une meme classe
-let checkboxLabel = document.querySelector("#checkbox1");
+const checkboxLabel = document.querySelector("#checkbox1");
 
 let incorrectEntriesCheckboxLabel = document.querySelector("#incorrect-entries-checkboxLabel");
 
@@ -109,7 +109,7 @@ function validationForm(e) {
         numberError++;
 
     }
-
+    //appartion ou disparition de modal ou celle de la confirmation en fonction du numero d'erreur
     if (numberError == 0) {
         modalbgConfirm.style.display = "block";
         modalbg.style.display = "none";

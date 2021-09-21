@@ -30,10 +30,10 @@ function launchModal() {
     modalbg.style.display = "block";
 }
 
-//Fermer les buttons 
+//Fermer le formulaire et inscription
 closeButtons.forEach((btn, i) => { //boucle tableau deux paramettres
     //i index de la modal
-    //on a mi
+
 
     btn.addEventListener("click", () => { //au clique sur le bouton pour fermer 
         modalbgs[i].style.display = "none"; //tout le bloc du formulaire disparrait 

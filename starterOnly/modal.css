@@ -245,6 +245,10 @@ input {
     font-size: 12px;
 }
 
+.incorrect-entries-color {
+    color: red;
+}
+
 
 /* 
 input[data-error]::after {

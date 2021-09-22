@@ -35,8 +35,8 @@ let incorrectEntriesLocation = document.querySelector("#incorrect-entries-locati
 
 //Recuperation de l'id crée pour les villes 
 const locations = document.querySelector("#locations");
-//
-const villes = document.querySelector("#villes");
+
+const citys = document.querySelector("#villes");
 
 //conditions d'utilisation.
 //prise des deux elements d'une meme classe
@@ -83,6 +83,10 @@ function validationForm(e) {
     //Date d'aujourd'hui
     let dateNow = new Date();
     let completedDate = dateNow.getFullYear() + '-' + '0' + (dateNow.getMonth() + 1) + '-' + dateNow.getDate();
+    //tableau de tout les valeurs mises pour les villes
+    let locationchecked = [location1.checked, location2.checked, location3.checked, location4.checked, location5.checked, location6.checked];
+    //tableau qui contiendra les valeurs des villes selectionnees
+    let locationsValues = [];
 
     //verification du prenom, il ne peut pas etre vide et il doit etre superieur à 2
 
@@ -137,21 +141,25 @@ function validationForm(e) {
 
     }
 
-
-    //Empecher de choisir la ville quand la personne n'a fait aucun tournois
-
-
-    if (quantity.value == 0) {
-        locations.style.display = 'none';
-        villes.style.display = 'none';
-    } else {
-        locations.style.display = 'block';
+    for (let i = 0; i < locationchecked.length; i++) {
+        if (locationchecked[i] == true) {
+            locationsValues.push(locationchecked[i]);
+        }
     }
+
+    //Empecher l'utilisateur de choisir plus de villes que de tournois participés 
+    if (quantity.value < locationsValues.length) {
+        incorrectEntriesLocation.textContent = "Vous ne pouvez pas choisir plus de villes que de tournois";
+        numberError++;
+    }
+
+    //Empecher de choisir une ville quand la personne n'a fait aucun tournois
+    if (quantity.value == 0) {
+        incorrectEntriesLocation.textContent = "Vous ne pouvez pas choisir une ville sans choisir un numero de tournois participés";
+        numberError++;
+    }
+
     //verification des fois ou la personne est allé à un concours 
-
-
-
-
 
 
     if (!quantity.value.match(/^\d+$/)) {
@@ -160,11 +168,9 @@ function validationForm(e) {
 
     }
 
-
-
     //verification si une ville a ete choisie 
     if (!location1.checked && !location2.checked && !location3.checked && !location4.checked && !location5.checked && !location6.checked) {
-        incorrectEntriesLocation.textContent = "ville non valide";
+        incorrectEntriesLocation.textContent = "Vous devez choisir une ville";
         numberError++;
     }
 

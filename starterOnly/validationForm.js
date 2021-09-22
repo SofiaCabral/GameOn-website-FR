@@ -77,43 +77,61 @@ function validationForm(e) {
     incorrectEntriesCheckboxLabel.textContent = "";
 
 
-
+    //Numero d'erreur 
     let numberError = 0;
 
-    // console.log(completedDate);
+    //Date d'aujourd'hui
+    let dateNow = new Date();
+    let completedDate = dateNow.getFullYear() + '-' + '0' + (dateNow.getMonth() + 1) + '-' + dateNow.getDate();
+
     //verification du prenom, il ne peut pas etre vide et il doit etre superieur à 2
-    if (!first.value.match(/^(?=.{2,20}$)[a-z]+(?:['\s][a-z]+)*$/i)) {
-        incorrectEntriesFirst.textContent = "Prénom non valide";
+
+    if (first.value == "") {
+        incorrectEntriesFirst.textContent = "Veuillez ne pas laissez le champ vide";
+        numberError++;
+
+
+    } else if (!first.value.match(/^[^0-9]+$/i)) {
+        incorrectEntriesFirst.textContent = "Votre prénom doit pas contenir des chiffres";
+        numberError++;
+    } else if (!first.value.match(/^[a-z0-9._-]{2,12}$/i)) {
+        incorrectEntriesFirst.textContent = "Mettez plus d'un caractere";
         numberError++;
     }
+
+
     //verification du nom,  il ne peut pas etre vide et il doit etre superieur à 2
-    if (!last.value.match(/^(?=.{2,20}$)[a-z]+(?:['\s][a-z]+)*$/i)) {
-        incorrectEntriesLast.textContent = "nom non valide";
+
+    if (last.value == "") {
+        incorrectEntriesLast.textContent = "Veuillez ne pas laissez le champ vide";
+        numberError++;
+
+    } else if (!last.value.match(/^[^0-9]+$/i)) {
+        incorrectEntriesLast.textContent = "Votre prénom doit pas contenir des chiffres";
+        numberError++;
+    } else if (!last.value.match(/^[a-z0-9._-]{2,12}$/i)) {
+        incorrectEntriesLast.textContent = "Mettez plus d'un caractere";
         numberError++;
     }
     //verification de l'email,  il doit être valide
 
+
     if (!email.value.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
-        incorrectEntriesEmail.textContent = "email non valide";
+        incorrectEntriesEmail.textContent = "Veuillez ne pas laisser l'email vide et mettre un email valide";
         numberError++;
     }
 
 
-    // console.log(birthdate.value);
 
 
-    // let dateNow = new Date();
-    // let completedDate = dateNow.getFullYear() + '-' + (dateNow.getMonth() + 1) + '-' + dateNow.getDate();
-    // console.log(dateNow);
-    // console.log(birthdate.value);
-
-    // if (birthdate.value == completedDate) {
-    //     console.log("ok");
-
-    // }
+    //Verification si la personne n'a pas mis une date trop recente
+    if (birthdate.value >= completedDate) {
+        incorrectEntriesBirthdate.textContent = "La date que vous avez introduit est trop récente";
+        numberError++;
+    }
     //verification de la date d'anniversaire
     if (!birthdate.value.match(/^([0-9]{2,4})\-([0-9]{2})\-([0-9]{2,4})$/)) {
-        incorrectEntriesBirthdate.textContent = "date d'anniversaire non valide";
+        incorrectEntriesBirthdate.textContent = "Remplissez le mois, l'année et le jour";
         numberError++;
 
 
@@ -121,6 +139,7 @@ function validationForm(e) {
 
 
     //Empecher de choisir la ville quand la personne n'a fait aucun tournois
+
 
     if (quantity.value == 0) {
         locations.style.display = 'none';
@@ -130,11 +149,18 @@ function validationForm(e) {
     }
     //verification des fois ou la personne est allé à un concours 
 
-    if (!quantity.value.match(/^\d+$/)) { //si ce n'est un numero
-        incorrectEntriesQuantity.textContent = "numero non valide";
+
+
+
+
+
+    if (!quantity.value.match(/^\d+$/)) {
+        incorrectEntriesQuantity.textContent = "Veuillez introduire que des chiffres et ne pas laisser le champ vide";
         numberError++;
 
     }
+
+
 
     //verification si une ville a ete choisie 
     if (!location1.checked && !location2.checked && !location3.checked && !location4.checked && !location5.checked && !location6.checked) {

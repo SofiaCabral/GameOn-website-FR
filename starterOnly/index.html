@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="utf-8" />
@@ -79,19 +79,19 @@
                   name="quantity"
                   min="0"
                   max="99"
-                  value="19"
+                 
                 />
                 <p id='incorrect-entries-quantity'  class="incorret-entries"></p>
               </div>
-              <p class="text-label">Quelles villes ?</p>
-              <div class="formData">
+              <p class="text-label" id="villes">Quelles villes ?</p>
+              <div class="formData" id="locations">
                 <input
                   class="checkbox-input"
                   type="radio"
                   id="location1"
                   name="location"
                   value="New York"
-                 checked
+                
                 />
                 <label class="checkbox-label" for="location1">
                   <span class="checkbox-icon"></span>
@@ -163,6 +163,7 @@
                 </label>
 
                             <br />
+                            <span id="incorrect-entries-checkboxLabel" class="incorret-entries"></span>
 
                             <input class="checkbox-input" type="checkbox" id="checkbox2" />
                             <label class="checkbox2-label" for="checkbox2">
@@ -171,7 +172,7 @@
                 </label>
                             <br />
                         </div>
-                        <span id="incorrect-entries-checkboxLabel" class="incorret-entries"></span>
+
                         <input class="btn-submit button" type="submit" value="C'est parti" />
                     </form>
                 </div>

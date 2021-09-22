@@ -7,7 +7,7 @@
 const buttonSubmit = document.querySelector(".btn-submit");
 //prenom et span pour l'affichage des erreurs
 const first = document.querySelector("#first");
-console.log(first);
+
 let incorrectEntriesFirst = document.querySelector("#incorrect-entries-first");
 //nom et span pour l'affichage des erreurs
 const last = document.querySelector("#last");
@@ -32,6 +32,12 @@ const location4 = document.querySelector("#location4");
 const location5 = document.querySelector("#location5");
 const location6 = document.querySelector("#location6");
 let incorrectEntriesLocation = document.querySelector("#incorrect-entries-location");
+
+//Recuperation de l'id crée pour les villes 
+const locations = document.querySelector("#locations");
+//
+const villes = document.querySelector("#villes");
+
 //conditions d'utilisation.
 //prise des deux elements d'une meme classe
 const checkboxLabel = document.querySelector("#checkbox1");
@@ -48,6 +54,8 @@ function addColor() {
     incorrectEntriesCheckboxLabel.classList.add("incorrect-entries-color");
 }
 addColor();
+
+
 
 
 
@@ -68,8 +76,11 @@ function validationForm(e) {
     incorrectEntriesLocation.textContent = "";
     incorrectEntriesCheckboxLabel.textContent = "";
 
+
+
     let numberError = 0;
 
+    // console.log(completedDate);
     //verification du prenom, il ne peut pas etre vide et il doit etre superieur à 2
     if (!first.value.match(/^(?=.{2,20}$)[a-z]+(?:['\s][a-z]+)*$/i)) {
         incorrectEntriesFirst.textContent = "Prénom non valide";
@@ -86,17 +97,41 @@ function validationForm(e) {
         incorrectEntriesEmail.textContent = "email non valide";
         numberError++;
     }
+
+
+    // console.log(birthdate.value);
+
+
+    // let dateNow = new Date();
+    // let completedDate = dateNow.getFullYear() + '-' + (dateNow.getMonth() + 1) + '-' + dateNow.getDate();
+    // console.log(dateNow);
+    // console.log(birthdate.value);
+
+    // if (birthdate.value == completedDate) {
+    //     console.log("ok");
+
+    // }
     //verification de la date d'anniversaire
     if (!birthdate.value.match(/^([0-9]{2,4})\-([0-9]{2})\-([0-9]{2,4})$/)) {
         incorrectEntriesBirthdate.textContent = "date d'anniversaire non valide";
-        console.log(birthdate.value); //permet de voir la valeur sur la console
         numberError++;
+
+
     }
 
+
+    //Empecher de choisir la ville quand la personne n'a fait aucun tournois
+
+    if (quantity.value == 0) {
+        locations.style.display = 'none';
+        villes.style.display = 'none';
+    } else {
+        locations.style.display = 'block';
+    }
     //verification des fois ou la personne est allé à un concours 
+
     if (!quantity.value.match(/^\d+$/)) { //si ce n'est un numero
         incorrectEntriesQuantity.textContent = "numero non valide";
-        console.log(quantity.value);
         numberError++;
 
     }
@@ -106,9 +141,11 @@ function validationForm(e) {
         incorrectEntriesLocation.textContent = "ville non valide";
         numberError++;
     }
+
+
     //verification des conditions d'utilisation.
     if (!checkboxLabel.checked) { //si les conditions ne sont pas coches
-        incorrectEntriesCheckboxLabel.textContent = "Vous devez vérifier que vous acceptez les termes et conditions";
+        incorrectEntriesCheckboxLabel.textContent = "vérifiez que vous acceptez les termes et conditions d'utilisation";
         numberError++;
 
     }
@@ -118,3 +155,8 @@ function validationForm(e) {
         modalbg.style.display = "none";
     }
 }
+
+
+// var ladate = new Date();
+// console.log("Nous sommes le : ");
+// console.log(ladate.getDate() + "/" + (ladate.getMonth() + 1) + "/" + ladate.getFullYear());

@@ -43,17 +43,7 @@ const citys = document.querySelector("#villes");
 const checkboxLabel = document.querySelector("#checkbox1");
 let incorrectEntriesCheckboxLabel = document.querySelector("#incorrect-entries-checkboxLabel");
 
-//Ajout de la couleur pour les messages d'erreur
-function addColor() {
-    incorrectEntriesFirst.classList.add("incorrect-entries-color");
-    incorrectEntriesLast.classList.add("incorrect-entries-color");
-    incorrectEntriesEmail.classList.add("incorrect-entries-color");
-    incorrectEntriesBirthdate.classList.add("incorrect-entries-color");
-    incorrectEntriesQuantity.classList.add("incorrect-entries-color");
-    incorrectEntriesLocation.classList.add("incorrect-entries-color");
-    incorrectEntriesCheckboxLabel.classList.add("incorrect-entries-color");
-}
-addColor();
+
 
 
 
@@ -83,11 +73,19 @@ function validationForm(e) {
     //Date d'aujourd'hui
     let dateNow = new Date();
     let completedDate = dateNow.getFullYear() + '-' + '0' + (dateNow.getMonth() + 1) + '-' + dateNow.getDate();
-    //tableau de tout les valeurs mises pour les villes
-    let locationchecked = [location1.checked, location2.checked, location3.checked, location4.checked, location5.checked, location6.checked];
-    //tableau qui contiendra les valeurs des villes selectionnees
-    let locationsValues = [];
 
+
+    //Ajout de la couleur pour les messages d'erreur
+    function addColor() {
+        incorrectEntriesFirst.classList.add("incorrect-entries-color");
+        incorrectEntriesLast.classList.add("incorrect-entries-color");
+        incorrectEntriesEmail.classList.add("incorrect-entries-color");
+        incorrectEntriesBirthdate.classList.add("incorrect-entries-color");
+        incorrectEntriesQuantity.classList.add("incorrect-entries-color");
+        incorrectEntriesLocation.classList.add("incorrect-entries-color");
+        incorrectEntriesCheckboxLabel.classList.add("incorrect-entries-color");
+    }
+    addColor();
     //verification du prenom, il ne peut pas etre vide et il doit etre superieur à 2
 
     if (first.value == "") {
@@ -117,22 +115,19 @@ function validationForm(e) {
         incorrectEntriesLast.textContent = "Mettez plus d'un caractere";
         numberError++;
     }
+
     //verification de l'email,  il doit être valide
-
-
     if (!email.value.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
         incorrectEntriesEmail.textContent = "Veuillez ne pas laisser l'email vide et mettre un email valide";
         numberError++;
     }
-
-
-
 
     //Verification si la personne n'a pas mis une date trop recente
     if (birthdate.value >= completedDate) {
         incorrectEntriesBirthdate.textContent = "La date que vous avez introduit est trop récente";
         numberError++;
     }
+
     //verification de la date d'anniversaire
     if (!birthdate.value.match(/^([0-9]{2,4})\-([0-9]{2})\-([0-9]{2,4})$/)) {
         incorrectEntriesBirthdate.textContent = "Remplissez le mois, l'année et le jour";
@@ -141,13 +136,20 @@ function validationForm(e) {
 
     }
 
-    for (let i = 0; i < locationchecked.length; i++) {
-        if (locationchecked[i] == true) {
-            locationsValues.push(locationchecked[i]);
+    //tableau de tout les valeurs mises pour les villes
+    let locationschecked = [location1.checked, location2.checked, location3.checked, location4.checked, location5.checked, location6.checked];
+    //tableau qui contiendra les valeurs des villes selectionnees
+    let locationsValues = [];
+
+    //Mettre les valeurs des villes selectionnes dans un nouveau tableau
+    for (let i = 0; i < locationschecked.length; i++) {
+        if (locationschecked[i] == true) {
+            locationsValues.push(locationschecked[i]);
         }
     }
 
-    //Empecher l'utilisateur de choisir plus de villes que de tournois participés 
+    //Empecher l'utilisateur de choisir plus de villes que de tournois participés
+    //en comparant la largeur du tableau des villes selectionner avec le numero de tounoirs participés 
     if (quantity.value < locationsValues.length) {
         incorrectEntriesLocation.textContent = "Vous ne pouvez pas choisir plus de villes que de tournois";
         numberError++;
@@ -155,7 +157,7 @@ function validationForm(e) {
 
     //Empecher de choisir une ville quand la personne n'a fait aucun tournois
     if (quantity.value == 0) {
-        incorrectEntriesLocation.textContent = "Vous ne pouvez pas choisir une ville sans choisir un numero de tournois participés";
+        incorrectEntriesLocation.textContent = "Vous ne pouvez pas choisir une ville sans avoir participé au moins à un tournois";
         numberError++;
     }
 
@@ -187,8 +189,3 @@ function validationForm(e) {
         modalbg.style.display = "none";
     }
 }
-
-
-// var ladate = new Date();
-// console.log("Nous sommes le : ");
-// console.log(ladate.getDate() + "/" + (ladate.getMonth() + 1) + "/" + ladate.getFullYear());
